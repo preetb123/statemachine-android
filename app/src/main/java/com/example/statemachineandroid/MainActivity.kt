@@ -18,6 +18,7 @@ import ru.nsk.kstatemachine.initialState
 import ru.nsk.kstatemachine.onEntry
 import ru.nsk.kstatemachine.onExit
 import ru.nsk.kstatemachine.onTriggered
+import ru.nsk.kstatemachine.state
 import ru.nsk.kstatemachine.transition
 import ru.nsk.kstatemachine.visitors.exportToPlantUml
 
@@ -92,7 +93,7 @@ class MainActivity : AppCompatActivity() {
                     show("In initial state")
                 }
 
-                transition<Events.LoginSuccessEvent> {
+                transition<Events.LoginSuccessEvent>("login success") {
                     targetState = States.InGroupCallState
                     onTriggered {
                         Log.d("StateMachine", "Transitioning to group call state")
@@ -102,6 +103,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             addState(States.InGroupCallState) {
+                state("InGroupCallState")
                 onEntry {
                     Log.d("StateMachine", "Entered group call state")
                     show("Entered group call state")
@@ -122,6 +124,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             addState(States.InOneOnOneCallState) {
+                state("InOneOnOneCallState")
                 onEntry {
                     Log.d("StateMachine", "Entered 1:1 call state")
                     show("Entered 1:1 call state")
